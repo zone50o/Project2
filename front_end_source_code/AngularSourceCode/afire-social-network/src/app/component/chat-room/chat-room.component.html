@@ -1,0 +1,32 @@
+<div>
+
+    <p>Welcome to the Chat Room <strong>Users Connected: {{connected}}</strong></p>
+
+    <div id="messagesList" class="messageContainerScroll">
+
+        <div class="_dspFlex chatItm" *ngFor="let msg of messages" [ngClass]="{'toLeft': isSameUser(msg.user)}">
+            <div class="logo_user">
+                <img src="{{msg.user.asnUserProfileImageUrl}}" alt="" />
+            </div>
+            <div class="msg_text">
+                <span>
+                    {{msg.user.asnUserFirstname}}
+                </span>
+                <p>
+                    {{msg.message}}
+                </p>
+                <div class="date">
+                    {{msg.time}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="_dspFlex chat_button">
+        <input type="text" [(ngModel)]="message" />
+        <button (click)="preparePayload()">
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+
+</div>

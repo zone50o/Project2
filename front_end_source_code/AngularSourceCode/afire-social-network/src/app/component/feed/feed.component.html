@@ -1,0 +1,114 @@
+<mat-card class="entire-card box_shd">
+
+    <mat-card-header style="font-weight: 800;">
+        <img mat-card-avatar [src]="post.asnUserFK.asnUserProfileImageUrl">
+
+        <mat-card-title>
+
+            <strong class="userPost">
+                <a [routerLink]="['/profile', post.asnUserFK.asnUserId]">
+                    {{post.asnUserFK.asnUserFirstname + " " + post.asnUserFK.asnUserLastname}}</a>
+            </strong>
+
+        </mat-card-title>
+
+        <mat-card-subtitle>@{{post.asnUserFK.asnUser}}</mat-card-subtitle>
+
+    </mat-card-header>
+
+    <div style="text-align: end; margin-bottom: 5%;">
+        <mat-card-subtitle>{{parseFullDate(post.asnCreatedAt)}}</mat-card-subtitle>
+    </div>
+
+
+    <div *ngIf="!hasVideo()" class="imageDiv">
+        <img mat-card-image *ngIf="(post.asnPostImageUrl)" [src]="post.asnPostImageUrl">
+
+    </div>
+
+    <div *ngIf="hasVideo()" class="_dspFlex w100">
+        <div class="flexSpace"></div>
+        <youtube-player [videoId]="getYouTubeId()" suggestedQuality="highres" [height]="400" [width]="750" [startSeconds]="0">
+        </youtube-player>
+        <div class="flexSpace"></div>
+    </div>
+
+
+    <mat-card-content>
+
+        <div style="text-align: center;" class="text_collapse " [ngClass]="{'isOpen': isExtended()}">
+
+            <div class="showmore" style="margin-top: 5px;" *ngIf="post.asnPostDescription.length > 250" (click)="updateIsExtended()">
+                Read more...
+                <mat-divider></mat-divider>
+            </div>
+            <p style="color: black;">{{post.asnPostDescription}}</p>
+        </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+
+        <div class="_dspFlex">
+            <button ngDefaultControl mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" #Like="ngModel" (click)="toggleLike()" [(ngModel)]="likeCount" [disabled]="!isUserLoggedIn()">
+                <mat-icon *ngIf="hasLiked">favorite</mat-icon>
+                <mat-icon *ngIf="!hasLiked">favorite_border</mat-icon>
+                {{likeCount}}
+
+            </button>
+            <div class="flexSpace"></div>
+            <button *ngIf="isUserLoggedIn()" style="margin-top: 5px;" mat-raised-button color="primary" (click)="showCommentTA()">Comment</button>
+
+            <mat-divider></mat-divider>
+
+
+        </div>
+
+        <div *ngIf="showCommentTextArea && isUserLoggedIn()">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+
+                <mat-label>Leave a comment</mat-label>
+
+                <textarea matInput placeholder="Say something..." [(ngModel)]="postComment"></textarea>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="saveComment()">Save</button>
+
+            <!--<div>
+                <ul>
+                    <li *ngFor="let comment of comments">
+                        {{comment.asnCommentDescription}}
+                        <strong>Comment By </strong>
+                        <a [routerLink]="['/profile', comment.asnUserFK.asnUserId]">{{comment.asnUserFK.asnUser}}</a>
+                    </li>
+                </ul>
+            </div>-->
+
+            <div class="_dspFlex" *ngFor="let comment of comments">
+                <div>
+                    <div class="logo_user">
+                        <img src="{{comment.asnUserFK.asnUserProfileImageUrl}}" alt="" />
+                    </div>
+                    <div class="chatItm">
+
+                        <strong class="userPost">
+                            <a [routerLink]="['/profile', comment.asnUserFK.asnUserId]">
+                                {{comment.asnUserFK.asnUserFirstname + " " + comment.asnUserFK.asnUserLastname}}</a>
+                        </strong>
+
+                        <!--<span class="">
+                            {{comment.asnUserFK.asnUserFirstname}}
+                            {{comment.asnUserFK.asnUserLastname}}
+                        </span>-->
+
+                        <p class="msg_text">
+                            {{comment.asnCommentDescription}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-card-actions>
+</mat-card>
