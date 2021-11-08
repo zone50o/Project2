@@ -43,6 +43,6 @@ To-do list:
 * Launch back end in a Maven Project in STS with Tomcat server.
 
 ## Contributors
-* Eduardo Gonzalas
+* Eduardo Gonzalez
 * Santiago Ramirez
 * Andrew Carr
