@@ -37,15 +37,12 @@ To-do list:
 * Rework User Interface
 
 ## Getting Started
-git clone
-
-Be sure to include BOTH Windows and Unix command
-Be sure to mention if the commands only work on a specific platform (eg. AWS, GCP)
-
-All the code required to get started
-Images of what it should look like
+* git clone https://github.com/PorkodiVenkatesh/PROJECT-NAME#readme
+* Setup environment variables
+* Launch front end in Visual Studio Code
+* Launch back end in a Maven Project in STS with Tomcat server.
 
 ## Contributors
-Eduardo Gonzalas
-Santiago Ramirez
-Andrew Carr
+* Eduardo Gonzalas
+* Santiago Ramirez
+* Andrew Carr
