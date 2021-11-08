@@ -14,7 +14,7 @@ In this social network, everyone is friends with everyone. As a user, you will b
 ## Features
 List of features ready and TODOs for future development
 
-* Account Regirstration
+* Account Registration
 * Account Login
 * Password Reset with email
 * View Profile
